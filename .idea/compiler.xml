@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="E-commerce-api" />
+        <module name="E-commerce-common" />
+        <module name="E-commerce-mapper" />
+        <module name="E-commerce-pojo" />
+        <module name="E-commerce-service" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_STRING" value="-encoding utf-8" />
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="E-commerce" options="" />
+      <module name="E-commerce-api" options="" />
+      <module name="E-commerce-common" options="" />
+      <module name="E-commerce-mapper" options="" />
+      <module name="E-commerce-pojo" options="" />
+      <module name="E-commerce-service" options="" />
+    </option>
+  </component>
+</project>
