@@ -3,7 +3,7 @@ package com.imooc.service.impl;
 import com.imooc.enums.Sex;
 import com.imooc.mapper.UsersMapper;
 import com.imooc.pojo.Users;
-import com.imooc.pojo.bo.UserBo;
+import com.imooc.pojo.bo.UserBO;
 import com.imooc.service.UserService;
 import com.imooc.utils.DateUtil;
 import com.imooc.utils.MD5Utils;
@@ -43,25 +43,25 @@ public class UserServiceImpl implements UserService {
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public Users createUser(UserBo userBo) {
+    public Users createUser(UserBO userBO) {
 
         String userId = sid.nextShort();
 
         Users user = new Users();
         user.setId(userId);
-        user.setUsername(userBo.getUsername());
+        user.setUsername(userBO.getUsername());
         try {
-            user.setPassword(MD5Utils.getMD5Str(userBo.getPassword()));
+            user.setPassword(MD5Utils.getMD5Str(userBO.getPassword()));
         } catch (Exception e) {
             e.printStackTrace();
         }
         //默认用户昵称同用户名
-        user.setNickname(userBo.getUsername());
+        user.setNickname(userBO.getUsername());
         //默认头像
         user.setFace(USER_FACE);
         user.setBirthday(DateUtil.stringToDate(USER_BIRTHDAY));
         //默认性别 保密
-        user.setSex(Sex.secret.type);
+        user.setSex(Sex.SECRET.type);
 
         user.setCreatedTime(new Date());
         user.setUpdatedTime(new Date());

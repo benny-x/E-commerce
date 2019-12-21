@@ -1,7 +1,7 @@
 package com.imooc.controller;
 
 import com.imooc.pojo.Users;
-import com.imooc.pojo.bo.UserBo;
+import com.imooc.pojo.bo.UserBO;
 import com.imooc.service.UserService;
 import com.imooc.utils.CookieUtils;
 import com.imooc.utils.IMOOCJSONResult;
@@ -46,13 +46,13 @@ public class PassportController {
 
     @ApiOperation(value = "用户注册", notes = "用户注册", httpMethod = "POST")
     @PostMapping("/regist")
-    public IMOOCJSONResult regist(@RequestBody UserBo userBo,
+    public IMOOCJSONResult regist(@RequestBody UserBO userBO,
                                   HttpServletRequest request,
                                   HttpServletResponse response){
 
-        String username = userBo.getUsername();
-        String password = userBo.getPassword();
-        String confirmPassword = userBo.getConfirmPassword();
+        String username = userBO.getUsername();
+        String password = userBO.getPassword();
+        String confirmPassword = userBO.getConfirmPassword();
 
         // 1.判断用户名和密码不为空
         if (StringUtils.isBlank(username) ||
@@ -78,24 +78,27 @@ public class PassportController {
         }
 
         // 5.实现注册
-        Users userResult = userService.createUser(userBo);
+        Users userResult = userService.createUser(userBO);
 
         userResult = setNullProperty(userResult);
 
         CookieUtils.setCookie(request,response, "user",
                 JsonUtils.objectToJson(userResult), true);
 
+        // TODO 生成用户token, 存入redis会话
+        // TODO 同步购物车数据
+
         return IMOOCJSONResult.ok();
     }
 
     @ApiOperation(value = "用户登陆", notes = "用户登陆", httpMethod = "POST")
     @PostMapping("/login")
-    public IMOOCJSONResult login(@RequestBody UserBo userBo,
+    public IMOOCJSONResult login(@RequestBody UserBO userBO,
                                  HttpServletRequest request,
                                  HttpServletResponse response) throws Exception {
 
-        String username = userBo.getUsername();
-        String password = userBo.getPassword();
+        String username = userBO.getUsername();
+        String password = userBO.getPassword();
 
         // 1.判断用户名和密码不为空
         if (StringUtils.isBlank(username) ||
@@ -116,6 +119,9 @@ public class PassportController {
 
         CookieUtils.setCookie(request,response, "user",
                 JsonUtils.objectToJson(userResult), true);
+
+        // TODO 生成用户token, 存入redis会话
+        // TODO 同步购物车数据
 
         return IMOOCJSONResult.ok(userResult);
     }
