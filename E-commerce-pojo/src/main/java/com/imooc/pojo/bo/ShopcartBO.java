@@ -1,17 +1,27 @@
 package com.imooc.pojo.bo;
 
+import io.swagger.annotations.ApiModelProperty;
+
 /**
- * 购物车BO
+ * 用于创建购物车的BO对象
  */
 public class ShopcartBO {
 
+    @ApiModelProperty(value = "商品id", name="itemId", example = "cake-1001", required = true)
     private String itemId;
+    @ApiModelProperty(value = "商品图片", name="itemImgUrl", example = "food.jpg", required = false)
     private String itemImgUrl;
+    @ApiModelProperty(value = "商品名", name="itemName", example = "猪肉脯", required = false)
     private String itemName;
+    @ApiModelProperty(value = "规格id", name="specId", example = "001", required = false)
     private String specId;
+    @ApiModelProperty(value = "规格名", name="specName", example = "原味", required = false)
     private String specName;
+    @ApiModelProperty(value = "购买数量", name="buyCounts", example = "10", required = false)
     private Integer buyCounts;
+    @ApiModelProperty(value = "优惠价", name="priceDiscount", example = "88", required = false)
     private String priceDiscount;
+    @ApiModelProperty(value = "售价", name="priceNormal", example = "100", required = false)
     private String priceNormal;
 
     public String getItemId() {

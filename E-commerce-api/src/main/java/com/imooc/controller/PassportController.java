@@ -9,6 +9,7 @@ import com.imooc.utils.JsonUtils;
 import com.imooc.utils.MD5Utils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,9 @@ public class PassportController {
 
     @ApiOperation(value = "用户名是否存在", notes = "用户名是否存在", httpMethod = "GET")
     @GetMapping("/usernameIsExist")
-    public IMOOCJSONResult usernameIsExist(@RequestParam String username){
+    public IMOOCJSONResult usernameIsExist(
+                        @ApiParam(name = "username", value = "用户名", required = true)
+                        @RequestParam String username){
 
         // 1.判断用户名不能为空
         if (StringUtils.isBlank(username)) {
@@ -138,7 +141,8 @@ public class PassportController {
 
     @ApiOperation(value = "用户退出登陆", notes = "用户退出登陆", httpMethod = "POST")
     @PostMapping("/logout")
-    public IMOOCJSONResult logout(@RequestParam String userId,
+    public IMOOCJSONResult logout(@ApiParam(name = "userId", value = "用户id", required = true)
+                                  @RequestParam String userId,
                                   HttpServletRequest request,
                                   HttpServletResponse response) {
 

@@ -2,7 +2,8 @@ package com.imooc.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.imooc.enums.CommentLevel;
+import com.imooc.enums.CommentLevelEnum;
+import com.imooc.enums.YesOrNoEnum;
 import com.imooc.mapper.*;
 import com.imooc.pojo.*;
 import com.imooc.pojo.vo.CommentLevelCountsVO;
@@ -83,9 +84,9 @@ public class ItemServiceImpl implements ItemService {
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public CommentLevelCountsVO queryCommentCounts(String itemId) {
-        Integer goodCounts = getCommentCounts(itemId, CommentLevel.GOOD.type);
-        Integer normalCounts = getCommentCounts(itemId, CommentLevel.NORMAL.type);
-        Integer badCounts = getCommentCounts(itemId, CommentLevel.BAD.type);
+        Integer goodCounts = getCommentCounts(itemId, CommentLevelEnum.GOOD.type);
+        Integer normalCounts = getCommentCounts(itemId, CommentLevelEnum.NORMAL.type);
+        Integer badCounts = getCommentCounts(itemId, CommentLevelEnum.BAD.type);
         Integer totalCounts = goodCounts + normalCounts + badCounts;
 
         CommentLevelCountsVO countsVO = new CommentLevelCountsVO();
@@ -175,4 +176,48 @@ public class ItemServiceImpl implements ItemService {
 
         return itemsMapperCustom.queryItemsBySpecIds(specIdsList);
     }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public ItemsSpec queryItemSpecById(String specId) {
+        return itemsSpecMapper.selectByPrimaryKey(specId);
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public String queryItemMainImgById(String itemId) {
+        ItemsImg itemsImg = new ItemsImg();
+        itemsImg.setItemId(itemId);
+        itemsImg.setIsMain(YesOrNoEnum.YES.type);
+        ItemsImg result = itemsImgMapper.selectOne(itemsImg);
+        return result != null ? result.getUrl() : "";
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public void decreaseItemSpecStock(String specId, int buyCounts) {
+
+        // synchronized 不推荐使用, 集群下无用, 性能低下
+        // 锁数据库: 不推荐, 导致数据库性能低下
+        // 分布式锁 zookeeper redis
+
+        // lockUtil.getLock(); --加锁
+        // 1. 查询库存
+//        int stock = 2;
+//
+//        // 2. 判断库存是否能够减少到0以下
+//        if (stock - buyCounts < 0) {
+//           // 提示用户库存不够
+//
+//        }
+
+        // lockUtil.unLock(); --解锁
+
+        int result = itemsMapperCustom.decreaseItemSpecStock(specId, buyCounts);
+        if (result != 1) {
+            throw new RuntimeException("订单创建失败,原因:库存不足!");
+        }
+
+    }
+
 }

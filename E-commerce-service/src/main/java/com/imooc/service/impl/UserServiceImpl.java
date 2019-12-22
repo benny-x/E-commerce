@@ -1,6 +1,6 @@
 package com.imooc.service.impl;
 
-import com.imooc.enums.Sex;
+import com.imooc.enums.SexEnum;
 import com.imooc.mapper.UsersMapper;
 import com.imooc.pojo.Users;
 import com.imooc.pojo.bo.UserBO;
@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
         user.setFace(USER_FACE);
         user.setBirthday(DateUtil.stringToDate(USER_BIRTHDAY));
         //默认性别 保密
-        user.setSex(Sex.SECRET.type);
+        user.setSex(SexEnum.SECRET.type);
 
         user.setCreatedTime(new Date());
         user.setUpdatedTime(new Date());
