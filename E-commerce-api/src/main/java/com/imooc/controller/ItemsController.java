@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api(value = "商品接口", tags = {"商品信息展示的相关接口"})
+@Api(value = "商品详情", tags = {"商品详情"})
 @RestController
 @RequestMapping("items")
 public class ItemsController extends BaseController {
@@ -83,11 +83,11 @@ public class ItemsController extends BaseController {
         }
 
         if (page == null) {
-            page = COMMENT_PAGE_NUMBER;
+            page = COMMON_PAGE_NUMBER;
         }
 
         if (pageSize == null) {
-            pageSize = COMMENT_PAGE_SIZE;
+            pageSize = COMMON_PAGE_SIZE;
         }
 
         PagedGridResult grid = itemService.queryPagedComments(itemId, level, page, pageSize);
@@ -95,7 +95,7 @@ public class ItemsController extends BaseController {
         return IMOOCJSONResult.ok(grid);
     }
 
-    @ApiOperation(value = "搜索商品列表(通过关键字) ", notes = "通过关键字搜索商品列表", httpMethod = "GET")
+    @ApiOperation(value = "搜索商品列表(通过关键字) ", notes = "查询商品关键字", httpMethod = "GET")
     @GetMapping("/search")
     public IMOOCJSONResult search(
             @ApiParam(name = "keywords", value = "关键字", required = true)
@@ -112,7 +112,7 @@ public class ItemsController extends BaseController {
         }
 
         if (page == null) {
-            page = COMMENT_PAGE_NUMBER;
+            page = COMMON_PAGE_NUMBER;
         }
 
         if (pageSize == null) {
@@ -124,7 +124,7 @@ public class ItemsController extends BaseController {
         return IMOOCJSONResult.ok(grid);
     }
 
-    @ApiOperation(value = "搜索商品列表(通过分类id)", notes = "通过分类id搜索商品列表", httpMethod = "GET")
+    @ApiOperation(value = "查询商品分类", notes = "搜索商品列表(通过分类id)", httpMethod = "GET")
     @GetMapping("/catItems")
     public IMOOCJSONResult catItems(
             @ApiParam(name = "catId", value = "三级分类id", required = true)
@@ -141,7 +141,7 @@ public class ItemsController extends BaseController {
         }
 
         if (page == null) {
-            page = COMMENT_PAGE_NUMBER;
+            page = COMMON_PAGE_NUMBER;
         }
 
         if (pageSize == null) {

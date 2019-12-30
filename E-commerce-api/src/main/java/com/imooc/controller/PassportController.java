@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Api(value = "注册登陆", tags = {"用于注册登陆的相关接口"})
+@Api(value = "注册登陆", tags = {"注册登陆"})
 @RestController
 @RequestMapping("passport")
-public class PassportController {
+public class PassportController extends BaseController {
 
     @Autowired
     private UserService userService;
@@ -127,16 +127,6 @@ public class PassportController {
         // TODO 同步购物车数据
 
         return IMOOCJSONResult.ok(userResult);
-    }
-
-    public Users setNullProperty(Users userResult){
-        userResult.setPassword(null);
-        userResult.setMobile(null);
-        userResult.setEmail(null);
-        userResult.setCreatedTime(null);
-        userResult.setUpdatedTime(null);
-        userResult.setBirthday(null);
-        return userResult;
     }
 
     @ApiOperation(value = "用户退出登陆", notes = "用户退出登陆", httpMethod = "POST")

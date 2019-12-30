@@ -45,6 +45,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <!--移除springboot内置tomcat-->
+            <exclusions>
+                <exclusion>
+                    <artifactId>spirng-boot-starter-tomcat</artifactId>
+                    <groupId>imooc.org.springframework.boot</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -124,6 +131,13 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.21</version>
+        </dependency>
+
+        <!--添加依赖：servlet支持-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>

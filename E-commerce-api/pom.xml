@@ -11,6 +11,8 @@
 
     <artifactId>E-commerce-api</artifactId>
 
+    <packaging>war</packaging>
+
     <dependencies>
 
         <dependency>

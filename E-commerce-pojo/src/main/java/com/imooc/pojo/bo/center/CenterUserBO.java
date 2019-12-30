@@ -8,7 +8,7 @@ import javax.validation.constraints.*;
 import java.util.Date;
 
 /**
- * 用于创建用户的BO对象
+ * 返回给前端的用户BO对象
  */
 @ApiModel(value = "用户对象BO", description = "从客户端,由用户传入的数据封装在entity中")
 public class CenterUserBO {
@@ -36,10 +36,10 @@ public class CenterUserBO {
     @Min(value = 0, message = "性别选择不正确")
     @Max(value = 2, message = "性别选择不正确")
     @ApiModelProperty(value = "性别", name="sex", example = "0:女 1:男 2:保密", required = false)
-    private String sex;
+    private Integer sex;
 
     @ApiModelProperty(value = "生日", name="birthday", example = "1900-01-01", required = false)
-    private String birthday;
+    private Date birthday;
 
 
     public String getUsername() {
@@ -82,19 +82,19 @@ public class CenterUserBO {
         this.email = email;
     }
 
-    public String getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(Integer sex) {
         this.sex = sex;
     }
 
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 }

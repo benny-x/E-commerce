@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Api(value = "购物车接口controller", tags = {"购物车接口相关的api"})
+@Api(value = "购物车", tags = {"购物车"})
 @RequestMapping("shopcart")
 @RestController
 public class ShopCartController {
 
-    @ApiOperation(value = "添加商品到购物车", notes = "添加商品到购物车", httpMethod = "POST")
+    @ApiOperation(value = "添加商品到购物车", notes = "添加商品", httpMethod = "POST")
     @PostMapping("/add")
     public IMOOCJSONResult add(
             @RequestParam String userId,
@@ -34,7 +34,7 @@ public class ShopCartController {
         return IMOOCJSONResult.ok();
     }
 
-    @ApiOperation(value = "从购物车中删除商品", notes = "从购物车中删除商品", httpMethod = "POST")
+    @ApiOperation(value = "从购物车中删除商品", notes = "删除商品", httpMethod = "POST")
     @PostMapping("/del")
     public IMOOCJSONResult del(
             @RequestParam String userId,

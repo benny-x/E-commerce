@@ -16,7 +16,7 @@ import tk.mybatis.mapper.util.StringUtil;
 
 import java.util.List;
 
-@Api(value = "地址相关", tags = {"地址相关的api接口"})
+@Api(value = "收货地址", tags = {"收货地址"})
 @RequestMapping("address")
 @RestController
 public class AddressController {
@@ -32,7 +32,7 @@ public class AddressController {
     @Autowired
     private AddressService addressService;
 
-    @ApiOperation(value = "根据用户id查询收货地址列表", notes = "根据用户id查询收货地址列表", httpMethod = "POST")
+    @ApiOperation(value = "根据用户id查询收货地址列表", notes = "地址列表", httpMethod = "POST")
     @PostMapping("/list")
     public IMOOCJSONResult list (@ApiParam(name = "userId", value = "用户id", required = true)
                                  @RequestParam String userId) {
@@ -45,7 +45,7 @@ public class AddressController {
         return IMOOCJSONResult.ok(list);
     }
 
-    @ApiOperation(value = "用户新增地址", notes = "用户新增地址", httpMethod = "POST")
+    @ApiOperation(value = "用户新增地址", notes = "新增地址", httpMethod = "POST")
     @PostMapping("/add")
     public IMOOCJSONResult list (@RequestBody AddressBO addressBO) {
 
@@ -97,7 +97,7 @@ public class AddressController {
         return IMOOCJSONResult.ok();
     }
 
-    @ApiOperation(value = "用户修改地址", notes = "用户修改地址", httpMethod = "POST")
+    @ApiOperation(value = "用户修改地址", notes = "修改地址", httpMethod = "POST")
     @PostMapping("/update")
     public IMOOCJSONResult update (@RequestBody AddressBO addressBO) {
 
@@ -115,7 +115,7 @@ public class AddressController {
         return IMOOCJSONResult.ok();
     }
 
-    @ApiOperation(value = "用户删除地址", notes = "用户删除地址", httpMethod = "POST")
+    @ApiOperation(value = "用户删除地址", notes = "删除地址", httpMethod = "POST")
     @PostMapping("/delete")
     public IMOOCJSONResult update (@ApiParam(name = "userId", value = "用户Id", required = true)
                                    @RequestParam String userId,
@@ -130,7 +130,7 @@ public class AddressController {
         return IMOOCJSONResult.ok();
     }
 
-    @ApiOperation(value = "用户设置默认地址", notes = "用户设置默认地址", httpMethod = "POST")
+    @ApiOperation(value = "用户设置默认地址", notes = "设置默认地址", httpMethod = "POST")
     @PostMapping("/setDefault")
     public IMOOCJSONResult setDefault (@ApiParam(name = "userId", value = "用户Id", required = true)
                                        @RequestParam String userId,

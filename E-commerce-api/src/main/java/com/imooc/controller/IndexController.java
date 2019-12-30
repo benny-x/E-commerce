@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Api(value = "首页", tags = {"首页展示的相关接口"})
+@Api(value = "首页", tags = {"首页"})
 @RestController
 @RequestMapping("index")
 public class IndexController {
@@ -30,7 +30,7 @@ public class IndexController {
     @Autowired
     private CategoryService categoryService;
 
-    @ApiOperation(value = "获取首页轮播图列表", notes = "获取首页轮播图列表", httpMethod = "GET")
+    @ApiOperation(value = "获取首页轮播图列表", notes = "查询轮播图", httpMethod = "GET")
     @GetMapping("/carousel")
     public IMOOCJSONResult carousel(){
         List<Carousel> list = carouselService.queryAll(YesOrNoEnum.YES.type);
@@ -42,14 +42,14 @@ public class IndexController {
      * 1. 第一次刷新主页查询大分类, 渲染展示到首页
      * 2. 如果鼠标上移到大分类, 则加载其子分类的内容, 如果已经存在子分类, 则不需要加载 (懒加载)
      */
-    @ApiOperation(value = "获取商品分类(一级分类)", notes = "获取商品分类(一级分类)", httpMethod = "GET")
+    @ApiOperation(value = "获取商品分类(一级分类)", notes = "查询商品主分类", httpMethod = "GET")
     @GetMapping("/cats")
     public IMOOCJSONResult cats(){
         List<Category> list = categoryService.queryAllRootLevelCat();
         return IMOOCJSONResult.ok(list);
     }
 
-    @ApiOperation(value = "获取商品子分类", notes = "获取商品子分类", httpMethod = "GET")
+    @ApiOperation(value = "获取商品子分类", notes = "查询商品子分类", httpMethod = "GET")
     @GetMapping("/subCat/{rootCatId}")
     public IMOOCJSONResult subCat(
             @ApiParam(name = "rootCatId", value = "一级分类id", required = true)
@@ -64,7 +64,7 @@ public class IndexController {
         return IMOOCJSONResult.ok(list);
     }
 
-    @ApiOperation(value = "查询每个一级分类下的最新6条商品数据", notes = "查询每个一级分类下的最新6条商品数据", httpMethod = "GET")
+    @ApiOperation(value = "查询每个一级分类下的最新6条商品数据", notes = "查询分类推荐商品", httpMethod = "GET")
     @GetMapping("/sixNewItems/{rootCatId}")
     public IMOOCJSONResult sixNewItems(
             @ApiParam(name = "rootCatId", value = "一级分类id", required = true)

@@ -1,7 +1,6 @@
 package com.imooc.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.imooc.enums.CommentLevelEnum;
 import com.imooc.enums.YesOrNoEnum;
 import com.imooc.mapper.*;
@@ -22,7 +21,7 @@ import tk.mybatis.mapper.entity.Example;
 import java.util.*;
 
 @Service
-public class ItemServiceImpl implements ItemService {
+public class ItemServiceImpl extends BaseServiceImpl implements ItemService {
 
     @Autowired
     private ItemsMapper itemsMapper;
@@ -126,16 +125,6 @@ public class ItemServiceImpl implements ItemService {
         }
 
         return setterPagedGrid(list,page);
-    }
-
-    private PagedGridResult setterPagedGrid(List<?> list, Integer page){
-        PageInfo<?> pageList = new PageInfo<>(list);
-        PagedGridResult grid = new PagedGridResult();
-        grid.setPage(page);
-        grid.setRows(list);
-        grid.setTotal(pageList.getPages());
-        grid.setRecords(pageList.getTotal());
-        return grid;
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
